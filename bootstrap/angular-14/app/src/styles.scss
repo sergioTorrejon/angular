@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*
+Admin LTE customization
+*/
+
+// bootstrap functions customization
+@import "./styles/bootstrap-functions";
+
+// bootstrap variables customization
+@import "./styles/bootstrap-variables";
+
+//build boostrap library
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "./styles/variables";
+
+// build Font Awesome Icons
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+
+// build AdminLTE theme styles
+@import "../node_modules/admin-lte/build/scss/AdminLTE";
+
+// Google Font: Source Sans Pro
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
