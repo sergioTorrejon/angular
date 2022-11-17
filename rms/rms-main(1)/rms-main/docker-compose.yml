@@ -1,0 +1,53 @@
+version: '3'
+
+volumes:
+  database: {}
+  uploads: {}
+
+services:
+  database:
+    image: postgres:15.0
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: permacoop
+      PGUSER: docker
+      PGPASSWORD: docker
+    volumes:
+      - 'database:/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
+
+  api:
+    image: node:18-alpine
+    working_dir: '/var/www'
+    depends_on:
+      - database
+    volumes:
+      - './api:/var/www:cached'
+      - 'uploads:/var/www/uploads'
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    command: npm run start:dev
+
+  #app:
+  #  image: node:18-alpine
+  #  working_dir: '/var/www'
+  #  depends_on:
+  #    - api
+  #  volumes:
+  #    - './app:/var/www:cached'
+  #  ports:
+  #    - 5000:5000
+  #    - 10000:10000
+  #  command: npm run dev
+
+  #nginx:
+  #  image: nginx:latest
+  #  ports:
+  #    - 80:80
+  #  depends_on:
+  #    - 'app'
+  #    - 'api'
+  #  volumes:
+  #    - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro

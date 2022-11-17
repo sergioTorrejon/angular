@@ -1,0 +1,217 @@
+<!-- HEADER -->
+<div fxLayout="row wrap">
+  <div>
+    <img src="assets/images/logo-aps.png" alt="homepage" class="light-logo">
+  </div>
+  <span fxFlex></span>
+  <button mat-icon-button color="warn" matDialogClose="cancel" matTooltip="Salir" (click)="close('close')">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<h2 mat-dialog-title class="head-dialog" style="text-align: center;">ACTUALIZAR BAJA DE FUNCIONARIO</h2>
+<!--FIN DEL HEADER -->
+<!-- BODY -->
+<div mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+  <!-- FORMULARIO -->
+    <!-- SUBTITULO FORMULARIO -->
+      <mat-card-subtitle>DATOS</mat-card-subtitle>
+    <!-- FIN SUBTITULO FORMULARIO -->
+    <!-- FORMULARIO INSECION -->
+      <div fxLayout="row wrap">
+    <!----------------------- FILA 1 ----------------------------->
+      <!-- PUBLICAR EN WEB -->
+        <div fxFlex.gt-lg="50" fxFlex.gt-md="50"  fxFlex.gt-xs="100" fxFlex="100">
+          <form  [formGroup]="formGroup" >
+            <mat-form-field class="form-element" appearance="outline" >
+              <mat-label>Causal de Baja</mat-label>
+              <mat-select formControlName="categoriaBaja">
+                <mat-option *ngFor="let option of this.causalBaja" [value]="option.value">{{option.label}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </div>
+
+      <!-- FECHA -->
+        <div fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+          <form  [formGroup]="formGroup" >
+            <mat-form-field class="form-element" appearance="outline" >
+              <mat-label>Fecha</mat-label>
+              <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="fechaBaja" readonly>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <!-- NUMERO -->
+        <div fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+          <form  [formGroup]="formGroup" >
+            <mat-form-field class="form-element" appearance="outline" >
+              <mat-label> Documento de Respaldo </mat-label>
+              <input  matInput formControlName="nroBaja" maxlength = "4" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+              <mat-error >*Número 4 dígitos Ej.0025</mat-error>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <!-- COMENTARIOS -->
+        <div fxFlex.gt-lg="100" fxFlex.gt-md="100"  fxFlex.gt-xs="100" fxFlex="100" >
+          <form  [formGroup]="formGroup" >
+            <mat-form-field class="form-element" appearance="outline"  >
+              <mat-label>Comentario</mat-label>
+              <input  matInput formControlName="comentarios" maxlength = "2000" >
+              <mat-error >Ingrese un comentario</mat-error>
+            </mat-form-field>
+          </form>
+        </div>
+    <!---------------------- FIN FILA 1 ------------------------->
+
+
+    </div>
+    <!-- FIN DEL  FORMULARIO INSECION -->
+
+    <!-- BODY - DATA DE TABLA NOTIFICACIONES  -->
+    <div >
+      <mat-card-subtitle >Hechos Posteriores</mat-card-subtitle>
+      <!-- BODY - FORMULARIO DE INSERCION IN ROW  -->
+      <div fxLayout="row wrap">
+
+        <div fxFlex.gt-lg="30" fxFlex.gt-md="30"  fxFlex.gt-xs="100" fxFlex="100">
+          <form [formGroup]="formGroupNotificacion">
+            <mat-form-field class="form-search" appearance="outline" >
+              <mat-label>Causal</mat-label>
+              <mat-select formControlName="causal">
+                <mat-option *ngFor="let option of this.causalHechoPosterior" [value]="option.value">{{option.label}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <div fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100">
+          <form  [formGroup]="formGroupNotificacion" >
+            <mat-form-field  class="form-search"  appearance="outline" >
+              <mat-label>Fecha</mat-label>
+              <input matInput [matDatepicker]="pickerNotificacion" (click)="pickerNotificacion.open()" formControlName="fecha" readonly>
+              <mat-datepicker #pickerNotificacion></mat-datepicker>
+            </mat-form-field>
+          </form>
+        </div>
+
+
+        <div fxFlex.gt-lg="40" fxFlex.gt-md="40"  fxFlex.gt-xs="100" fxFlex="100">
+          <form  [formGroup]="formGroupNotificacion" >
+            <mat-form-field class="form-search" appearance="outline">
+              <mat-label>Descripción</mat-label>
+              <input  matInput formControlName="descripcion" >
+            </mat-form-field>
+          </form>
+        </div>
+
+        <div fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100">
+          <form [formGroup]="formGroupNotificacion">
+            <mat-form-field class="form-search" appearance="outline" >
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="estado">
+                <mat-option *ngFor="let option of this.optionEstado" [value]="option.value">{{option.label}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <div fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="10" fxFlex="10">
+          <form [formGroup]="formGroupNotificacion" class="form-search" (click)="saveNotificaciones(formGroupNotificacion.value)" >
+            <button mat-raised-button color="primary"  matTooltip="Registrar" *ngIf="formGroupNotificacion.valid"><mat-icon>add</mat-icon> Agregar</button>
+          </form>
+        </div>
+      </div>
+    <!-- FIN DEL BODY -->
+      <!-- BODY - CABECERA DE TABLA NOTIFICACIONES  -->
+      <div fxLayout="row wrap">
+        <div class="form-label" fxFlex.gt-lg="30" fxFlex.gt-md="30"  fxFlex.gt-xs="100" fxFlex="100">
+          Causal
+        </div>
+        <div class="form-label" fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100">
+          Fecha
+        </div>
+        <div class="form-label" fxFlex.gt-lg="40" fxFlex.gt-md="40"  fxFlex.gt-xs="100" fxFlex="100">
+          Descripción
+        </div>
+        <div class="form-label" fxFlex.gt-lg="10" fxFlex.gt-md="0"  fxFlex.gt-xs="100" fxFlex="100">
+          Estado
+        </div>
+        <div class="form-label" fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="10" fxFlex="10">
+        Acciones
+        </div>
+      </div>
+      <!-- FIN DEL BODY -->
+      <!-- BODY - DATA DE TABLA NOTIFICACIONES  -->
+      <div fxLayout="row wrap" *ngFor="let data of dataNotificaciones" >
+        <div class="form-search" fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100">
+          <div class="form-search">
+            {{data.causal}}
+          </div>
+        </div>
+        <div class="form-search" fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100">
+          <div class="form-search">
+            {{data.fecha | date:'dd/MM/yyyy'}}
+          </div>
+        </div>
+        <div class="form-search" fxFlex.gt-lg="35" fxFlex.gt-md="35"  fxFlex.gt-xs="100" fxFlex="100">
+          <div class="form-search">
+            {{data.descripcion}}
+          </div>
+        </div>
+        <div class="form-search" fxFlex.gt-lg="30" fxFlex.gt-md="30"  fxFlex.gt-xs="100" fxFlex="100">
+          <div class="form-search">
+            {{data.estado}}
+          </div>
+        </div>
+        <div fxFlex.gt-lg="5" fxFlex.gt-md="5"  fxFlex.gt-xs="5" fxFlex="5">
+            <button class="buttonTable" mat-icon-button matTooltip="Eliminar" (click)="deleteRow(data)">
+              <mat-icon color="warn">close</mat-icon>
+            </button>
+        </div>
+      </div>
+      <!-- FIN DEL BODY -->
+    </div>
+  <!-- FIN DEL BODY -->
+
+
+
+</div>
+<!--FIN DEL BODY -->
+
+<!-- ACTIONS -->
+<div mat-dialog-actions fxLayout="row wrap"   >
+  <div fxFlex.gt-lg="40" fxFlex.gt-md="40"  fxFlex.gt-xs="100" fxFlex="100">
+  </div>
+  <div style="text-align: right;" fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+      <div class="form-element" >
+        <button mat-raised-button color="warn" matTooltip="Anular" (click)="anular()" ><mat-icon>delete</mat-icon> Anular</button>
+      </div>
+      <div class="form-element" >
+      </div>
+  </div>
+  <div style="text-align: right;" fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+    <div class="form-element" >
+      <button mat-raised-button color="primary" matTooltip="Rectificar" ><mat-icon>edit</mat-icon> Rectificar</button>
+    </div>
+    <div class="form-element" >
+    </div>
+  </div>
+  <div style="text-align: right;" *ngIf="!formGroup.invalid" fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)"  >
+      <div class="form-element" >
+        <button mat-raised-button color="primary" type="submit" class="form-element" matTooltip="Registrar" [disabled]="formGroup.invalid"><mat-icon>save</mat-icon> Guardar</button>
+      </div>
+      <div class="form-element" >
+      </div>
+    </form>
+  </div>
+  <div style="text-align: right;" *ngIf="formGroup.invalid" fxFlex.gt-lg="20" fxFlex.gt-md="20"  fxFlex.gt-xs="100" fxFlex="100">
+    <div class="form-element" >
+      <button mat-raised-button color="accent" matTooltip="Cancelar" (click)="close('close')"><mat-icon>close</mat-icon> Cancelar</button>
+    </div>
+    <div class="form-element" >
+    </div>
+  </div>
+</div>

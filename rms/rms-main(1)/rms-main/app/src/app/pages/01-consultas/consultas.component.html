@@ -1,0 +1,25 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100">
+    <mat-card class="card">
+
+    <!-- TITULO CABECERA -->
+      <mat-card-header>
+        <img mat-card-avatar src="assets/images/img/documentos1.jpg" class="header-image"/>
+        <mat-card-title>Consultas</mat-card-title>
+        <span fxFlex></span>
+        <div style="text-align: right;"  fxFlex.gt-lg="10" fxFlex.gt-md="10"  fxFlex.gt-xs="100" fxFlex="100" >
+          <button mat-button color="primary" [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon>Opciones</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="reportes">Reportes</button>
+            </mat-menu>
+            <mat-menu #reportes="matMenu">
+              <button mat-menu-item>Descargar PDF</button>
+              <button mat-menu-item>Descargar Excel</button>
+            </mat-menu>
+        </div>
+      </mat-card-header>
+    <!-- FIN CABECERA -->
+
+    </mat-card>
+  </div>
+</div>

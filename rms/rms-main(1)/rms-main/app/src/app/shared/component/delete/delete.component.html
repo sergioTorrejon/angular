@@ -1,0 +1,17 @@
+<!--<div class="deleteDialog">-->
+<!--  <title mat-dialog-title class="dialogTitle">Eliminar registro?</title>-->
+<!--  <title mat-dialog-title class="dialogText">Estas seguro de eliminar este registro?</title>-->
+<!--  <mat-dialog-actions>-->
+<!--    <button mat-stroked-button class="acept-button" (click)="dialogRef.close('ok')">Aceptar</button>-->
+<!--    <button mat-stroked-button class="decline-button" (click)="dialogRef.close()">Cancelar</button>-->
+<!--  </mat-dialog-actions>-->
+<!--</div>-->
+
+<h2 mat-dialog-title>¿Deshabilitar registro?</h2>
+<mat-dialog-content class="mat-typography">
+    <p>Está seguro de deshabilitar este registro?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button (click)="dialogRef.close('ok')" [color]="'primary'">Aceptar</button>
+    <button mat-flat-button mat-dialog-close="" [color]="'primary'">Cancelar</button>
+</mat-dialog-actions>
